@@ -363,7 +363,7 @@
                     <input type="text" name="contact" placeholder="Mail/Instagram/PhoneNo./Fb" required>
                     <textarea name="message" rows="5" placeholder="Say hello" required></textarea>
                     <button type="submit">Send <i class="fas fa-paper-plane"></i></button>
-                    <input type="hidden" name="_next" value="#">
+                    <input type="hidden" name="_next" value="https://ujjwalravi.vercel.app?thanks">
                     <input type="hidden" name="_captcha" value="false">
                     <input type="hidden" name="_subject" value="New message from your website">
                 </form>
@@ -458,6 +458,11 @@
             updateProgressBar();
             calculateTime();
             setInterval(calculateTime, 1000);
+            
         });
+        const url = window.location.href;
+        if (url.includes('?thanks')) {
+            alert('Thanks for your message!');
+        }
     </script>
 </body>
