@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ujjwal Ravi</title>
+    <meta name="description" content="Official portfolio of Ujjwal Ravi, a passionate coder and front-end enthusiast from Narkatiaganj, Bihar.">
+     <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Ujjwal Ravi",
+      "jobTitle": "Intermediate Student & Aspiring Coder",
+      "url": "https://uagalaxy.netlify.app",
+      "sameAs": [
+        "https://facebook.com/uagalaxy",
+        "https://t.me/uagalaxy",
+        "https://instagram.com/ujjwa7ravi"
+      ],
+      "birthDate": "2009-01-17",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Narkatiaganj",
+        "addressRegion": "Bihar",
+        "addressCountry": "IN"
+      },
+      "knowsAbout": ["Coding", "Editing", "Opacarophile", "Astrophile"],
+      "image": {
+        "@type": "ImageObject",
+        "url": "ujjwalravi1.webp",
+        "name": "Ujjwal Ravi Profile Picture"
+      }
+    }
+     </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Delius:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <style>
+        :root {
+            --purple: #8A2BE2;
+            --dark-bg: #000;
+            --light-bg: #fff;
+            --text-dark: #000;
+            --text-light: #fff;
+            --montserrat: 'Delius', sans-serif;
+        }
+        @font-face {
+            font-family: nove;
+            src: url(Nove.otf);
+        }
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            font-family: var(--montserrat);
+            color: var(--text-light);
+            background-color: var(--dark-bg);
+        }
+        .container {
+            width: 300vw;
+            height: 100vh;
+            display: flex;
+            transition: transform 0.6s cubic-bezier(.39,0,.61,1.01);
+            will-change: transform;
+        }
+        .section {
+            width: 100vw;
+            height: 100vh;
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+        .intro-section {
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+            background-size:100%;
+            background-position: center;
+        }
+        .about-section {
+            background-color: var(--light-bg);
+            color: var(--text-dark);
+        }
+        .contact-section {
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+        }
+        .section .content-wrapper,
+        .name-title,
+        .social-icons,
+        .contact-form {
+            position: relative;
+            z-index: 10;
+        }
+        .name-title {
+            font-family: nove;
+            font-size: clamp(10vw, 15vw, 18vw);
+            font-weight: 900;
+            line-height: 1;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            padding: 0 5vw;
+            z-index: 15;
+        }
+        .section-title {
+            font-size: clamp(3rem, 5vw, 6rem);
+            font-weight: 700;
+            margin-bottom: 2rem;
+        }
+        .content-wrapper {
+            max-width: 80%;
+            text-align: center;
+        }
+        .personal-details {
+            font-size: clamp(1rem, 2vw, 1.8rem);
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+        .detail {
+            margin: 0.5rem 0;
+        }
+        .detail span:first-child {
+            font-weight: bold;
+        }
+        .social-icons {
+            margin-top: 2rem;
+        }
+        .social-icons a {
+            color: inherit;
+            margin: 0 1rem;
+            font-size: clamp(1.5rem, 3vw, 3rem);
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+        .social-icons a:hover {
+            transform: scale(1.2);
+            color: var(--purple);
+        }
+        .contact-form {
+            width: 100%;
+            max-width: 600px;
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid var(--text-light);
+            border-radius: 20px;
+            color: var(--text-light);
+            font-size: clamp(0.9rem, 1.2vw, 1.1rem);
+            font-family: inherit;
+            transition: border-color 0.3s ease;
+        }
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            outline: none;
+            border-color: var(--purple);
+            background: rgba(255, 255, 255, 0.15);
+        }
+        .contact-section input, .contact-section textarea {
+            color: var(--text-light);
+        }
+        .contact-form button {
+            padding: 1rem 2rem;
+            color: var(--text-light);
+            background:none;
+            border:none;
+            border-bottom: 2px solid var(--purple);
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: clamp(1rem, 1.5vw, 1.5rem);
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .contact-form button:hover {
+            background-color: var(--purple);
+            color: var(--text-light);
+        }
+        .portrait-cutout {
+            position: absolute;
+            z-index: 5;
+            width: clamp(150px, 20vw, 400px);
+            height: clamp(150px, 20vw, 400px);
+            background-size: 80%;
+            background-repeat: no-repeat;            
+            background-position: center;
+            opacity: 0;
+            transition:top 1s ease,right 1s ease,left 1s ease,bottom 1s ease, transform 1.2s cubic-bezier(.68,.5,.2,1.25), opacity 1s ease;
+        }
+        .portrait-1 {
+            transform: scale(0.5);
+            top:50%;
+            left:50%;
+            background-image: url('ujjwalravi2.webp');
+        }
+        .portrait-2 {
+            transform: scale(0.5);
+            bottom:50%;
+            right:50%;
+            background-image: url('ujjwalravi1.webp');
+         }
+        .portrait-3 {
+            transform: scale(0.5);
+            top:50%;
+            right:50%;
+            background-image: url('ujjwalravi3.webp');
+        }
+        .portrait-4 {
+            transform: scale(0.5);
+            bottom:35%;
+            right:40%;
+            background-image: url('ujjwalravi4.webp');
+        }
+        .section.is-active .portrait-1 {
+            top: 20%;
+            left: 10%;
+            transform: rotate(-10deg);
+            opacity: 1;
+        }
+        .section.is-active .portrait-2 {
+            bottom: 27%;
+            right: 2%;
+            transform: rotate(15deg);
+            opacity: 1;
+        }
+        .section.is-active .portrait-3 {
+            top: 37%;
+            right: 2%;
+            transform: translateY(-50%) rotate(15deg);
+            opacity: 1;
+        }
+        .section.is-active .portrait-4 {
+            bottom: 30%;
+            right: 55%;
+            transform: rotate(-15deg);
+            opacity: 1;
+        }
+        .progress-bar-container {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background-color:#0000000;
+            z-index: 100;
+        }
+        .progress-bar {
+            height: 100%;
+            width: 0%;
+            background-color: var(--purple);
+            transition: width 0.3s ease;
+        }
+        @keyframes blink {
+           0% { opacity: 1; }
+           10% { opacity: 0; }
+           20% { opacity: 1; }
+           30% { opacity: 0.3; }
+           40% { opacity: 1; }
+           50% { opacity: 0.5; }
+           60% { opacity: 1; }
+           70% { opacity: 0.7; }
+           80% { opacity: 0; }
+           90% { opacity: 0.9; }
+           100% { opacity: 1; }
+      }
+      .section.is-active form{
+           animation: blink 1s ease;
+       }
+        @media (max-width: 768px) {
+            .content-wrapper {
+                max-width: 90%;
+            }
+            .name-title {
+                font-size: 20vw;
+                letter-spacing: -0.01em;
+            }
+            .section-title {
+                font-size: 8vw;
+            }
+            .personal-details {
+                font-size: 3.5vw;
+            }
+            .social-icons a {
+                font-size: 6vw;
+            }
+            .contact-form input,
+            .contact-form textarea {
+                font-size: 3vw;
+            }
+            .contact-form button {
+                font-size: 4vw;
+            }
+            .portrait-cutout {
+                width: 180px;
+                height: 180px;
+            }
+        }
+    </style>
+    
+</head>
+<body>
+    <div class="container">
+        <section class="section intro-section is-active">
+            <h1 class="name-title">Ujjwal Ravi</h1>
+            <div class="portrait-cutout portrait-1" role="img" aria-label="Portrait of Ujjwal Ravi"></div>
+            <div class="portrait-cutout portrait-2" role="img" aria-label="A professional headshot of Ujjwal Ravi"></div>
+            <div class="portrait-cutout portrait-3" role="img" aria-label="Ujjwal Ravi in a casual setting"></div>
+            <div class="portrait-cutout portrait-4" role="img" aria-label="Thoughtful portrait of Ujjwal Ravi"></div>
+        </section>
+        <section class="section about-section">
+            <div class="content-wrapper">
+                <h2 class="section-title">About Me</h2>
+                <div class="personal-details">
+                    <p class="detail"><span><i class="fas fa-birthday-cake"></i> On earth since:</span> <span id="birth-date"></span></p>
+                    <p class="detail"><span><i class="fas fa-map-marker-alt"></i> Location:</span> Narkatiaganj [Bihar22]</p>
+                    <p class="detail"><span><i class="fas fa-graduation-cap"></i> Status:</span> Intermediate Student</p>
+                    <p class="detail"><span><i class="fas fa-code"></i> Passion:</span> Coding and editing</p>
+                    <p class="detail"><span><i class="fas fa-heart"></i> Loves:</span> Opacarophile🌅 & Astrophile🌌</p>
+                    <p class="detail"><span><i class="fas fa-star"></i> Idol:</span> **MS Dhoni**</p>
+                </div>
+                <div class="social-icons">
+                    <a href="#" class="fab fa-facebook-f" aria-label="Facebook"></a>
+                    <a href="#" class="fab fa-telegram" aria-label="Telegram"></a>
+                    <a href="#" class="fab fa-instagram" aria-label="Instagram"></a>
+                    <a href="#" class="fas fa-envelope" aria-label="Email"></a>
+                    <a href="#" class="fas fa-earth" aria-label="Portfolio"></a>
+                </div>
+            </div>
+        </section>
+        <section class="section contact-section">
+            <div class="content-wrapper">
+                <h2 class="section-title">Say Hello!</h2>
+                <form class="contact-form" action="#" method="POST">
+                    <input type="text" name="name" placeholder="Your good name" required>
+                    <input type="text" name="contact" placeholder="Mail/Instagram/PhoneNo./Fb" required>
+                    <textarea name="message" rows="5" placeholder="Say hello" required></textarea>
+                    <button type="submit">Send <i class="fas fa-paper-plane"></i></button>
+                    <input type="hidden" name="_next" value="#">
+                    <input type="hidden" name="_captcha" value="false">
+                    <input type="hidden" name="_subject" value="New message from your website">
+                </form>
+            </div>
+        </section>
+    </div>
+    <div class="progress-bar-container">
+        <div id="progress-bar" class="progress-bar"></div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const container = document.querySelector('.container');
+            const sections = document.querySelectorAll('.section');
+            const progressBar = document.getElementById('progress-bar');
+            
+            const totalSections = sections.length;
+            let currentSection = 0;
+            let isAnimating = false;
+            
+            let touchStartY = 0;
+            let touchStartX = 0;
+            window.addEventListener('wheel', (e) => {
+                e.preventDefault();
+                if (isAnimating) return;
+                isAnimating = true;
+                if (e.deltaY > 0) {
+                    if (currentSection < totalSections - 1) {
+                        currentSection++;
+                    }
+                } else {
+                    if (currentSection > 0) {
+                        currentSection--;
+                    }
+                }
+                updateScrollPosition();
+            }, { passive: false });
+            document.addEventListener('touchstart', (e) => {
+                touchStartY = e.touches[0].clientY;
+                touchStartX = e.touches[0].clientX;
+            });
+            document.addEventListener('touchend', (e) => {
+                if (isAnimating) return;
+                let touchEndY = e.changedTouches[0].clientY;
+                let touchEndX = e.changedTouches[0].clientX;
+                const deltaY = touchEndY - touchStartY;
+                const deltaX = touchEndX - touchStartX;
+                if (Math.abs(deltaY) > 50 && Math.abs(deltaY) > Math.abs(deltaX)) {
+                    isAnimating = true;
+                    if (deltaY < 0) {
+                        if (currentSection < totalSections - 1) {
+                            currentSection++;
+                        }
+                    } else {
+                        if (currentSection > 0) {
+                            currentSection--;
+                        }
+                    }
+                    updateScrollPosition();
+                }
+            });
+            function updateScrollPosition() {
+                sections.forEach(section => {
+                    section.classList.remove('is-active');
+                });
+                sections[currentSection].classList.add('is-active');
+                const offset = -currentSection * 100;
+                container.style.transform = `translateX(${offset}vw)`;
+                updateProgressBar();
+                setTimeout(() => {
+                    isAnimating = false;
+                }, 100);
+            }
+            function updateProgressBar() {
+                const progress = (currentSection / (totalSections - 1)) * 100;
+                progressBar.style.width = `${progress}%`;
+            }
+            const calculateTime = () => {
+                const startDate = new Date('2009-01-17T09:52:37Z');
+                const endDate = new Date();
+                const differenceInMilliseconds = endDate.getTime() - startDate.getTime();
+                const years = Math.floor(differenceInMilliseconds / (1000 * 60 * 60 * 24 * 365.25));
+                const months = Math.floor((differenceInMilliseconds % (1000 * 60 * 60 * 24 * 365.25)) / (1000 * 60 * 60 * 24 * 30.44));
+                const days = Math.floor((differenceInMilliseconds % (1000 * 60 * 60 * 24 * 30.44)) / (1000 * 60 * 60 * 24) +1);
+                const hours = Math.floor((differenceInMilliseconds % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((differenceInMilliseconds % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((differenceInMilliseconds % (1000 * 60)) / 1000);
+                const countElement = document.getElementById('birth-date');
+                if (countElement) {
+                    countElement.textContent = `${years}y ${months}m ${days}d ${hours}h ${minutes}m ${seconds}s`;
+                }
+            };
+            updateProgressBar();
+            calculateTime();
+            setInterval(calculateTime, 1000);
+        });
+    </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ujjwal Ravi</title>
+    <meta name="description" content="Official portfolio of Ujjwal Ravi, a passionate coder and front-end enthusiast from Narkatiaganj, Bihar.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Delius:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <style>
+        :root {
+            --purple: #8A2BE2;
+            --dark-bg: #000;
+            --light-bg: #fff;
+            --text-dark: #000;
+            --text-light: #fff;
+            --montserrat: 'Delius', sans-serif;
+        }
+        @font-face {
+            font-family: nove;
+            src: url(Nove.otf);
+        }
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            font-family: var(--montserrat);
+            color: var(--text-light);
+            background-color: var(--dark-bg);
+        }
+        .container {
+            width: 300vw;
+            height: 100vh;
+            display: flex;
+            transition: transform 0.6s cubic-bezier(.39,0,.61,1.01);
+            will-change: transform;
+        }
+        .section {
+            width: 100vw;
+            height: 100vh;
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+        .intro-section {
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+            background-size:100%;
+            background-position: center;
+        }
+        .about-section {
+            background-color: var(--light-bg);
+            color: var(--text-dark);
+        }
+        .contact-section {
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+        }
+        .section .content-wrapper,
+        .name-title,
+        .social-icons,
+        .contact-form {
+            position: relative;
+            z-index: 10;
+        }
+        .name-title {
+            font-family: nove;
+            font-size: clamp(10vw, 15vw, 18vw);
+            font-weight: 900;
+            line-height: 1;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            padding: 0 5vw;
+            z-index: 15;
+        }
+        .section-title {
+            font-size: clamp(3rem, 5vw, 6rem);
+            font-weight: 700;
+            margin-bottom: 2rem;
+        }
+        .content-wrapper {
+            max-width: 80%;
+            text-align: center;
+        }
+        .personal-details {
+            font-size: clamp(1rem, 2vw, 1.8rem);
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+        .detail {
+            margin: 0.5rem 0;
+        }
+        .detail span:first-child {
+            font-weight: bold;
+        }
+        .social-icons {
+            margin-top: 2rem;
+        }
+        .social-icons a {
+            color: inherit;
+            margin: 0 1rem;
+            font-size: clamp(1.5rem, 3vw, 3rem);
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+        .social-icons a:hover {
+            transform: scale(1.2);
+            color: var(--purple);
+        }
+        .contact-form {
+            width: 100%;
+            max-width: 600px;
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid var(--text-light);
+            border-radius: 20px;
+            color: var(--text-light);
+            font-size: clamp(0.9rem, 1.2vw, 1.1rem);
+            font-family: inherit;
+            transition: border-color 0.3s ease;
+        }
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            outline: none;
+            border-color: var(--purple);
+            background: rgba(255, 255, 255, 0.15);
+        }
+        .contact-section input, .contact-section textarea {
+            color: var(--text-light);
+        }
+        .contact-form button {
+            padding: 1rem 2rem;
+            color: var(--text-light);
+            background:none;
+            border:none;
+            border-bottom: 2px solid var(--purple);
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: clamp(1rem, 1.5vw, 1.5rem);
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .contact-form button:hover {
+            background-color: var(--purple);
+            color: var(--text-light);
+        }
+        .portrait-cutout {
+            position: absolute;
+            z-index: 5;
+            width: clamp(150px, 20vw, 400px);
+            height: clamp(150px, 20vw, 400px);
+            background-size: 80%;
+            background-repeat: no-repeat;            
+            background-position: center;
+            opacity: 0;
+            transition:top 1s ease,right 1s ease,left 1s ease,bottom 1s ease, transform 1.2s cubic-bezier(.68,.5,.2,1.25), opacity 1s ease;
+        }
+        .portrait-1 {
+            transform: scale(0.5);
+            top:50%;
+            left:50%;
+            background-image: url('ujjwalravi2.webp');
+        }
+        .portrait-2 {
+            transform: scale(0.5);
+            bottom:50%;
+            right:50%;
+            background-image: url('ujjwalravi1.webp');
+         }
+        .portrait-3 {
+            transform: scale(0.5);
+            top:50%;
+            right:50%;
+            background-image: url('ujjwalravi3.webp');
+        }
+        .portrait-4 {
+            transform: scale(0.5);
+            bottom:35%;
+            right:40%;
+            background-image: url('ujjwalravi4.webp');
+        }
+        .section.is-active .portrait-1 {
+            top: 20%;
+            left: 10%;
+            transform: rotate(-10deg);
+            opacity: 1;
+        }
+        .section.is-active .portrait-2 {
+            bottom: 27%;
+            right: 2%;
+            transform: rotate(15deg);
+            opacity: 1;
+        }
+        .section.is-active .portrait-3 {
+            top: 37%;
+            right: 2%;
+            transform: translateY(-50%) rotate(15deg);
+            opacity: 1;
+        }
+        .section.is-active .portrait-4 {
+            bottom: 30%;
+            right: 55%;
+            transform: rotate(-15deg);
+            opacity: 1;
+        }
+        .progress-bar-container {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background-color:#0000000;
+            z-index: 100;
+        }
+        .progress-bar {
+            height: 100%;
+            width: 0%;
+            background-color: var(--purple);
+            transition: width 0.3s ease;
+        }
+        @keyframes blink {
+           0% { opacity: 1; }
+           10% { opacity: 0; }
+           20% { opacity: 1; }
+           30% { opacity: 0.3; }
+           40% { opacity: 1; }
+           50% { opacity: 0.5; }
+           60% { opacity: 1; }
+           70% { opacity: 0.7; }
+           80% { opacity: 0; }
+           90% { opacity: 0.9; }
+           100% { opacity: 1; }
+      }
+      .section.is-active form{
+           animation: blink 1s ease;
+       }
+        @media (max-width: 768px) {
+            .content-wrapper {
+                max-width: 90%;
+            }
+            .name-title {
+                font-size: 20vw;
+                letter-spacing: -0.01em;
+            }
+            .section-title {
+                font-size: 8vw;
+            }
+            .personal-details {
+                font-size: 3.5vw;
+            }
+            .social-icons a {
+                font-size: 6vw;
+            }
+            .contact-form input,
+            .contact-form textarea {
+                font-size: 3vw;
+            }
+            .contact-form button {
+                font-size: 4vw;
+            }
+            .portrait-cutout {
+                width: 180px;
+                height: 180px;
+            }
+        }
+    </style>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Ujjwal Ravi",
+      "jobTitle": "Intermediate Student & Aspiring Coder",
+      "url": "https://uagalaxy.netlify.app",
+      "sameAs": [
+        "https://facebook.com/uagalaxy",
+        "https://t.me/uagalaxy",
+        "https://instagram.com/uagalaxy"
+      ],
+      "birthDate": "2009-01-17",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Narkatiaganj",
+        "addressRegion": "Bihar",
+        "addressCountry": "IN"
+      },
+      "knowsAbout": ["Coding", "Editing", "Opacarophile", "Astrophile"],
+      "image": {
+        "@type": "ImageObject",
+        "url": "ujjwalravi1.webp",
+        "name": "Ujjwal Ravi Profile Picture"
+      }
+    }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <section class="section intro-section is-active">
+            <h1 class="name-title">Ujjwal Ravi</h1>
+            <div class="portrait-cutout portrait-1" role="img" aria-label="Portrait of Ujjwal Ravi"></div>
+            <div class="portrait-cutout portrait-2" role="img" aria-label="A professional headshot of Ujjwal Ravi"></div>
+            <div class="portrait-cutout portrait-3" role="img" aria-label="Ujjwal Ravi in a casual setting"></div>
+            <div class="portrait-cutout portrait-4" role="img" aria-label="Thoughtful portrait of Ujjwal Ravi"></div>
+        </section>
+        <section class="section about-section">
+            <div class="content-wrapper">
+                <h2 class="section-title">About Me</h2>
+                <div class="personal-details">
+                    <p class="detail"><span><i class="fas fa-birthday-cake"></i> On earth since:</span> <span id="birth-date"></span></p>
+                    <p class="detail"><span><i class="fas fa-map-marker-alt"></i> Location:</span> Narkatiaganj [Bihar22]</p>
+                    <p class="detail"><span><i class="fas fa-graduation-cap"></i> Status:</span> Intermediate Student</p>
+                    <p class="detail"><span><i class="fas fa-code"></i> Passion:</span> Coding and editing</p>
+                    <p class="detail"><span><i class="fas fa-heart"></i> Loves:</span> Opacarophile🌅 & Astrophile🌌</p>
+                    <p class="detail"><span><i class="fas fa-star"></i> Idol:</span> **MS Dhoni**</p>
+                </div>
+                <div class="social-icons">
+                    <a href="#" class="fab fa-facebook-f" aria-label="Facebook"></a>
+                    <a href="#" class="fab fa-telegram" aria-label="Telegram"></a>
+                    <a href="#" class="fab fa-instagram" aria-label="Instagram"></a>
+                    <a href="#" class="fas fa-envelope" aria-label="Email"></a>
+                    <a href="#" class="fas fa-earth" aria-label="Portfolio"></a>
+                </div>
+            </div>
+        </section>
+        <section class="section contact-section">
+            <div class="content-wrapper">
+                <h2 class="section-title">Say Hello!</h2>
+                <form class="contact-form" action="#" method="POST">
+                    <input type="text" name="name" placeholder="Your good name" required>
+                    <input type="text" name="contact" placeholder="Mail/Instagram/PhoneNo./Fb" required>
+                    <textarea name="message" rows="5" placeholder="Say hello" required></textarea>
+                    <button type="submit">Send <i class="fas fa-paper-plane"></i></button>
+                    <input type="hidden" name="_next" value="#">
+                    <input type="hidden" name="_captcha" value="false">
+                    <input type="hidden" name="_subject" value="New message from your website">
+                </form>
+            </div>
+        </section>
+    </div>
+    <div class="progress-bar-container">
+        <div id="progress-bar" class="progress-bar"></div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const container = document.querySelector('.container');
+            const sections = document.querySelectorAll('.section');
+            const progressBar = document.getElementById('progress-bar');
+            
+            const totalSections = sections.length;
+            let currentSection = 0;
+            let isAnimating = false;
+            
+            let touchStartY = 0;
+            let touchStartX = 0;
+            window.addEventListener('wheel', (e) => {
+                e.preventDefault();
+                if (isAnimating) return;
+                isAnimating = true;
+                if (e.deltaY > 0) {
+                    if (currentSection < totalSections - 1) {
+                        currentSection++;
+                    }
+                } else {
+                    if (currentSection > 0) {
+                        currentSection--;
+                    }
+                }
+                updateScrollPosition();
+            }, { passive: false });
+            document.addEventListener('touchstart', (e) => {
+                touchStartY = e.touches[0].clientY;
+                touchStartX = e.touches[0].clientX;
+            });
+            document.addEventListener('touchend', (e) => {
+                if (isAnimating) return;
+                let touchEndY = e.changedTouches[0].clientY;
+                let touchEndX = e.changedTouches[0].clientX;
+                const deltaY = touchEndY - touchStartY;
+                const deltaX = touchEndX - touchStartX;
+                if (Math.abs(deltaY) > 50 && Math.abs(deltaY) > Math.abs(deltaX)) {
+                    isAnimating = true;
+                    if (deltaY < 0) {
+                        if (currentSection < totalSections - 1) {
+                            currentSection++;
+                        }
+                    } else {
+                        if (currentSection > 0) {
+                            currentSection--;
+                        }
+                    }
+                    updateScrollPosition();
+                }
+            });
+            function updateScrollPosition() {
+                sections.forEach(section => {
+                    section.classList.remove('is-active');
+                });
+                sections[currentSection].classList.add('is-active');
+                const offset = -currentSection * 100;
+                container.style.transform = `translateX(${offset}vw)`;
+                updateProgressBar();
+                setTimeout(() => {
+                    isAnimating = false;
+                }, 100);
+            }
+            function updateProgressBar() {
+                const progress = (currentSection / (totalSections - 1)) * 100;
+                progressBar.style.width = `${progress}%`;
+            }
+            const calculateTime = () => {
+                const startDate = new Date('2009-01-17T09:52:37Z');
+                const endDate = new Date();
+                const differenceInMilliseconds = endDate.getTime() - startDate.getTime();
+                const years = Math.floor(differenceInMilliseconds / (1000 * 60 * 60 * 24 * 365.25));
+                const months = Math.floor((differenceInMilliseconds % (1000 * 60 * 60 * 24 * 365.25)) / (1000 * 60 * 60 * 24 * 30.44));
+                const days = Math.floor((differenceInMilliseconds % (1000 * 60 * 60 * 24 * 30.44)) / (1000 * 60 * 60 * 24) +1);
+                const hours = Math.floor((differenceInMilliseconds % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((differenceInMilliseconds % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((differenceInMilliseconds % (1000 * 60)) / 1000);
+                const countElement = document.getElementById('birth-date');
+                if (countElement) {
+                    countElement.textContent = `${years}y ${months}m ${days}d ${hours}h ${minutes}m ${seconds}s`;
+                }
+            };
+            updateProgressBar();
+            calculateTime();
+            setInterval(calculateTime, 1000);
+        });
+    </script>
+</body>
+</html>
