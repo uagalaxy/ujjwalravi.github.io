@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Portfolio Gallery</title>
+    <style>
+        /*
+         * GLOBAL RESET AND UTILITIES
+         */
+        :root {
+            --color-background: #0d1117; /* Dark background */
+            --color-foreground: #ffffff; /* White content color */
+            --color-accent: #007bff; /* Blue accent for hover/focus */
+            --padding-desktop: 5px;
+            --padding-mobile: 6vw;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--color-background);
+            color: var(--color-foreground);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: var(--padding-desktop);
+        }
+
+        /*
+         * GALLERY CONTAINER
+         */
+        .gallery-container {
+            width: 100%;
+            max-width: 1400px;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        /*
+         * SECTION STYLING
+         */
+        .gallery-section {
+            display: grid;
+            gap: 5px;
+        }
+
+        /*
+         * IMAGE GALLERY (SQUARE RATIO, 3 PER ROW)
+         */
+        .image-gallery {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        .image-holder {
+            /* Create a square using the padding-bottom trick */
+            position: relative;
+            padding-bottom: 100%; /* 1:1 Aspect Ratio (Square) */
+            overflow: hidden;
+            border-radius: 8px;
+            background-color: #21262d; /* Placeholder color */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .image-holder img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .image-holder:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+            outline: 2px solid var(--color-accent);
+            outline-offset: 4px;
+        }
+
+        /*
+         * VIDEO GALLERY (9:16 RATIO, 3 IN A ROW)
+         */
+        .video-gallery {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        .video-holder {
+            position: relative;
+            /* 16:9 ratio is height:width. We want 9:16 (Portrait) */
+            padding-bottom: calc(16 / 9 * 100%); /* 9:16 Aspect Ratio */
+            overflow: hidden;
+            border-radius: 8px;
+            background-color: #21262d; /* Placeholder color */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .video-holder:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+            outline: 2px solid var(--color-accent);
+            outline-offset: 4px;
+        }
+
+        .video-holder video,
+        .video-holder iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: cover;
+        }
+
+        /*
+         * WEB DESIGN SHOWCASE (RESPONSIVE)
+         */
+        .web-design-showcase {
+            display: flex;
+            gap: 10px;
+        }
+
+        .design-holder {
+            flex: 1;
+            min-height: 200px;
+            border: 2px solid #30363d;
+            border-radius: 12px;
+            overflow: hidden;
+            background-color: #f0f0f0; /* Light background for the "screen" */
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            transition: box-shadow 0.3s ease;
+        }
+        
+        .design-holder:hover {
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+            border-color: var(--color-accent);
+        }
+        
+        .design-holder iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: block;
+        }
+
+        /*
+         * RESPONSIVENESS (MOBILE FIRST)
+         */
+     
+    </style>
+</head>
+<body>
+    <div class="gallery-container">
+
+        <div class="gallery-section image-gallery">
+            <div class="image-holder"><img src="placeholder-img-1.jpg" alt=""></div>
+            <div class="image-holder"><img src="placeholder-img-2.jpg" alt=""></div>
+            <div class="image-holder"><img src="placeholder-img-3.jpg" alt=""></div>
+            <div class="image-holder"><img src="placeholder-img-4.jpg" alt=""></div>
+            <div class="image-holder"><img src="placeholder-img-5.jpg" alt=""></div>
+            <div class="image-holder"><img src="placeholder-img-6.jpg" alt=""></div>
+        </div>
+
+        <div class="gallery-section video-gallery">
+            <div class="video-holder">
+                <video src="placeholder-video-1.mp4" controls muted loop></video>
+            </div>
+            <div class="video-holder">
+                <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Video Placeholder 2" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            <div class="video-holder">
+                <video src="placeholder-video-3.mp4" controls muted loop></video>
+            </div>
+        </div>
+
+        <div class="gallery-section web-design-showcase">
+            <div class="design-holder">
+                <iframe src="https://example.com" title="Web Design 1"></iframe>
+            </div>
+            <div class="design-holder">
+                <iframe src="https://www.google.com/doodles" title="Web Design 2"></iframe>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>
