@@ -133,7 +133,7 @@
     <style>
         /* BASE & THEME VARIABLES */
         :root {
-            --purple: white;
+            --purple: #9333ea; /* Using a clear purple for better visibility */
             --dark-bg: #000;
             --light-bg: #fff;
             --text-dark: #000;
@@ -159,24 +159,74 @@
             margin: 0;
             padding: 0;
             height: 100%;
-            /* Keep body overflow hidden for horizontal snap */
-            overflow: hidden; 
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
             font-family: var(--montserrat);
             color: var(--text-light);
             background-color: var(--dark-bg);
-           
+            /* Important: Keep body overflow hidden for horizontal snap */
+            overflow: hidden; 
         }
+        
+        /* --- LOADER STYLES --- */
+        #loader-wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--dark-bg); /* Match background */
+            z-index: 99999; /* Always on top */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.5s ease-out;
+        }
+
+        .loaded #loader-wrapper {
+            opacity: 0;
+            pointer-events: none; /* Make it unclickable once faded out */
+        }
+        
+        .loader-spinner {
+            border: 5px solid rgba(255, 255, 255, 0.2);
+            border-top: 5px solid var(--purple); /* Accent color spinner */
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+        
+        .loader-text {
+            color: var(--text-light);
+            font-size: 1.2rem;
+            font-family: var(--montserrat);
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* --- MAIN CONTENT STYLES --- */
         .container {
             /* 4 sections wide */
             width: 400vw; 
             height: 100vh;
             display: flex;
-            transition: transform 0.6s cubic-bezier(.39,0,.61,1.01);
-            will-change: transform;
+            /* Initially hidden to prevent FOUC */
+            opacity: 0; 
+            transition: opacity 0.5s 0.3s ease-in-out, transform 0.6s cubic-bezier(.39,0,.61,1.01);
+            will-change: transform, opacity;
             filter: saturate(0);
         }
+        
+        .loaded .container {
+            opacity: 1; /* Show when 'loaded' class is added to body */
+        }
+        
         .section {
             width: 100vw;
             height: 100vh;
@@ -755,6 +805,12 @@
 </head>
 <body >
     
+    <!-- LOADER SCREEN -->
+    <div id="loader-wrapper">
+        <div class="loader-spinner"></div>
+        <div class="loader-text">Loading the Galaxy...</div>
+    </div>
+    
     <!-- MEDIA PREVIEWER MODAL (Moved from JS, starts hidden via CSS) -->
     <div id="previewBox" class="preview-box">
         <div id="prebox" class="prebox" onclick="event.stopPropagation()">
@@ -902,6 +958,79 @@
     </div>
     <script>
         
+        // --- FLOATING ASTRO LOGIC ---
+        const space = document.getElementById('stage');
+        const astronaut = document.getElementById('floating-object');
+
+        // Initial state variables for the floating box
+        let x = 0; // x position (in pixels, relative to container)
+        let y = 0; // y position
+        let vx = 0.5; // Constant Velocity (Pixels per frame)
+        let vy = 0.3; 
+        let rotation = 0;
+        let vr = 0.2; // Constant rotational velocity
+        const BOUNCE_FACTOR = 1.0; 
+
+        /**
+         * Main function for the floating animation.
+         */
+        function animateFloat() {
+            // Get container size dynamically
+            const containerWidth = space.clientWidth;
+            const containerHeight = space.clientHeight;
+            const boxSize = astronaut.offsetWidth;
+
+            // 1. Update position and rotation based on constant velocity
+            x += vx;
+            y += vy;
+            rotation += vr;
+
+            // 2. Boundary detection (bouncing)
+            
+            // Left/Right boundaries
+            if (x < 0) {
+                x = 0;
+                vx = -vx * BOUNCE_FACTOR; // Reverse velocity
+            } else if (x > containerWidth - boxSize) {
+                x = containerWidth - boxSize;
+                vx = -vx * BOUNCE_FACTOR;
+            }
+
+            // Top/Bottom boundaries
+            if (y < 0) {
+                y = 0;
+                vy = -vy * BOUNCE_FACTOR;
+            } else if (y > containerHeight - boxSize) {
+                y = containerHeight - boxSize;
+                vy = -vy * BOUNCE_FACTOR;
+            }
+
+            // 3. Apply the transform
+            astronaut.style.transform = `translate(${x}px, ${y}px) rotate(${rotation}deg)`;
+
+            // Request the next frame
+            requestAnimationFrame(animateFloat);
+        }
+        
+        /**
+         * Initialization function to set the box in a random starting position.
+         */
+        function initializeFloatingObject() {
+            if (!space || !astronaut) return; 
+            
+            const containerWidth = space.clientWidth;
+            const containerHeight = space.clientHeight;
+            const boxSize = astronaut.offsetWidth;
+
+            // Set initial random position
+            x = Math.random() * (containerWidth - boxSize);
+            y = Math.random() * (containerHeight - boxSize);
+            
+            // Start the loop
+            animateFloat();
+        }
+
+        // --- DOMContentLoaded: Everything but external assets loaded ---
         document.addEventListener('DOMContentLoaded', () => {
             const container = document.querySelector('.container');
             const sections = document.querySelectorAll('.section');
@@ -1057,90 +1186,12 @@
             calculateTime();
             setInterval(calculateTime, 1000);
             
-            // --- FLOATING ASTRO LOGIC ---
-            
-            const space = document.getElementById('stage');
-        const astronaut = document.getElementById('floating-object');
-
-        // Initial state variables for the floating box
-        let x = 0; // x position (in pixels, relative to container)
-        let y = 0; // y position
-        
-        // Constant Velocity (Pixels per frame)
-        let vx = 0.5; 
-        let vy = 0.3; 
-        let rotation = 0;
-        let vr = 0.2; // Constant rotational velocity
-
-        const BOUNCE_FACTOR = 1.0; // Perfect, elastic bounce (constant speed)
-
-        /**
-         * Main function for the floating animation.
-         */
-        function animateFloat() {
-            // Get container size dynamically
-            const containerWidth = space.clientWidth;
-            const containerHeight = space.clientHeight;
-            const boxSize = astronaut.offsetWidth;
-
-            // 1. Update position and rotation based on constant velocity
-            x += vx;
-            y += vy;
-            rotation += vr;
-
-            // 2. Boundary detection (bouncing)
-            
-            // Left/Right boundaries
-            if (x < 0) {
-                x = 0;
-                vx = -vx * BOUNCE_FACTOR; // Reverse velocity
-            } else if (x > containerWidth - boxSize) {
-                x = containerWidth - boxSize;
-                vx = -vx * BOUNCE_FACTOR;
-            }
-
-            // Top/Bottom boundaries
-            if (y < 0) {
-                y = 0;
-                vy = -vy * BOUNCE_FACTOR;
-            } else if (y > containerHeight - boxSize) {
-                y = containerHeight - boxSize;
-                vy = -vy * BOUNCE_FACTOR;
-            }
-
-            // 3. Apply the transform
-            astronaut.style.transform = `translate(${x}px, ${y}px) rotate(${rotation}deg)`;
-
-            // Request the next frame
-            requestAnimationFrame(animateFloat);
-        }
-        
-        /**
-         * Initialization function to set the box in a random starting position.
-         */
-        function initialize() {
-            const containerWidth = space.clientWidth;
-            const containerHeight = space.clientHeight;
-            const boxSize = astronaut.offsetWidth;
-
-            // Set initial random position
-            x = Math.random() * (containerWidth - boxSize);
-            y = Math.random() * (containerHeight - boxSize);
-            
-            // Start the loop
-            animateFloat();
-        }
-
-        // Start the animation once the window loads and is ready
-        window.onload = initialize;
             
             // --- MEDIA PREVIEWER: LISTENERS ---
             
-            // 3.2 Get references (now hardcoded in HTML)
             const previewBox = document.getElementById('previewBox');
             const prebox = document.getElementById('prebox');
             const closeButton = document.getElementById('closeButton');
-            // Select all media items
             const mediaItems = document.querySelectorAll('.media-item');
 
             /**
@@ -1162,15 +1213,10 @@
             const openPreview = (e) => {
                 e.preventDefault();
                 
-                // Uses e.target to get the exact element clicked, ensuring we get the element with the 'src'
                 const item = e.target; 
                 const tagName = item.tagName.toLowerCase(); 
-                
-                // Safely retrieve the src
                 const src = item.getAttribute('src');
                 
-
-      
 
                 if (!src) {
                     console.error(`[Preview Error] Missing 'src' attribute on the clicked ${tagName} element.`);
@@ -1211,12 +1257,8 @@
             };
 
             // 3.3 Attach Event Listeners
-            
             mediaItems.forEach(item => {
                 item.addEventListener('click', openPreview);
-                
-
-
             });
 
             if (closeButton) {
@@ -1238,13 +1280,23 @@
                     closePreview();
                 }
             });
+            
+            // Handle form submission confirmation (Removed alert())
+            const url = window.location.href;
+            if (url.includes('?thanks')) {
+                alert("Thanks for your message!"); 
+            }
         });
         
-        // Handle form submission confirmation (Removed alert())
-        const url = window.location.href;
-        if (url.includes('?thanks')) {
-            alert("Thanks for your message!"); 
-        }
+        // --- WINDOW.LOAD: Hide Loader and Start Animations (after all images/assets are loaded) ---
+        window.addEventListener('load', () => {
+            // 1. Hide the loader and show content
+            document.body.classList.add('loaded');
+            
+            // 2. Start the floating object animation
+            initializeFloatingObject(); 
+        });
+
     </script>
 </body>
 </html>
