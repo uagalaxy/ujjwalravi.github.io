@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!--60% coded by AI-->
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ujjwal Ravi | Portfolio</title>
@@ -30,7 +30,6 @@
     <meta name="twitter:description" content="Official portfolio of Ujjwal Ravi, a passionate coder and front-end enthusiast from Narkatiaganj, Bihar.">
     <meta name="twitter:image" content="https://ujjwalravi.vercel.app/ujjwalravi1.webp">
     
-    <!-- ENHANCED JSON-LD STRUCTURED DATA FOR RICH RESULTS -->
      <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -132,16 +131,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Delius:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <style>
-        /* BASE & THEME VARIABLES */
+        
         :root {
-            --purple: #fff; /* Using a clear purple for better visibility */
+            --purple: #fff; 
             --dark-bg: #000;
             --light-bg: #fff;
             --text-dark: #000;
             --text-light: #fff;
             --montserrat: 'Delius', sans-serif;
             
-            /* VARS FOR GALLERY */
+            
             --gallery-gap: 16px;
             --gallery-card-bg: rgba(20, 20, 29, 0.5); 
             --gallery-accent-color: var(--purple); 
@@ -165,19 +164,19 @@
             font-family: var(--montserrat);
             color: var(--text-light);
             background-color: var(--dark-bg);
-            /* Important: Keep body overflow hidden for horizontal snap */
+            
             overflow: hidden; 
         }
         
-        /* --- LOADER STYLES --- */
+        
         #loader-wrapper {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: var(--dark-bg); /* Match background */
-            z-index: 99999; /* Always on top */
+            background: var(--dark-bg); 
+            z-index: 99999; 
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -187,12 +186,12 @@
 
         .loaded #loader-wrapper {
             opacity: 0;
-            pointer-events: none; /* Make it unclickable once faded out */
+            pointer-events: none; 
         }
         
         .loader-spinner {
             border: 5px solid rgba(255, 255, 255, 0.2);
-            border-top: 5px solid var(--purple); /* Accent color spinner */
+            border-top: 5px solid var(--purple); 
             border-radius: 50%;
             width: 50px;
             height: 50px;
@@ -211,13 +210,13 @@
             100% { transform: rotate(360deg); }
         }
 
-        /* --- MAIN CONTENT STYLES --- */
+        
         .container {
-            /* 4 sections wide */
+            
             width: 400vw; 
             height: 100vh;
             display: flex;
-            /* Initially hidden to prevent FOUC */
+            
             opacity: 0; 
             transition: opacity 0.5s 0.3s ease-in-out, transform 0.6s cubic-bezier(.39,0,.61,1.01);
             will-change: transform, opacity;
@@ -225,7 +224,7 @@
         }
         
         .loaded .container {
-            opacity: 1; /* Show when 'loaded' class is added to body */
+            opacity: 1; 
         }
         
         .section {
@@ -238,7 +237,7 @@
             align-items: center;
             position: relative;
             padding: 20px; 
-            /* By default, hide overflow for non-scrolling sections */
+            
             overflow-y: hidden; 
         }
         .intro-section {
@@ -254,7 +253,7 @@
             overflow:hidden;
             filter: invert(1);
          }
-         /* Portfolio Section: Needs internal scroll */
+         
         .portfolio-section {
             background-color: var(--dark-bg); 
             color: var(--text-light);
@@ -262,7 +261,7 @@
             justify-content: flex-start;
             padding-top: 50px;
             padding-bottom: 50px;
-            /* IMPORTANT: Allows vertical scroll within the content */
+            
             overflow-y: auto; 
         }
         .contact-section {
@@ -599,14 +598,14 @@
             }
         }
 
-        /* --- PORTFOLIO GALLERY STYLES --- */
+        
 
         .gallery-container {
             max-width: 600px;
             margin: 0 auto;
             padding: 0 5px;
             width: 100%; 
-            /* Added padding-bottom to ensure bottom content is visible */
+            
             padding-bottom: 80px; 
         }
         
@@ -623,14 +622,14 @@
             padding-left: 5px;
         }
         
-        /* --- General Grid Structure --- */
+        
         .gallery-grid {
             display: grid;
             gap: 5px;
             margin-bottom: var(--gallery-gap);
         }
         
-        /* --- Image Section: Square Ratio Grid --- */
+        
         .image-grid {
             grid-template-columns: repeat(3, 1fr);
         }
@@ -656,7 +655,7 @@
             display: block;
         }
         
-        /* --- Video Section: Portrait Ratio Grid --- */
+        
         .video-grid {
             grid-template-columns: repeat(3, 1fr);
         }
@@ -664,7 +663,7 @@
         .video-portrait {
             position: relative;
             width: 100%;
-            padding-bottom: 177.77%; /* 9:16 Aspect Ratio */
+            padding-bottom: 177.77%; 
             overflow: hidden;
             background-color: var(--gallery-card-bg);
             border-radius: var(--gallery-radius-sm);
@@ -683,7 +682,7 @@
             display: block;
         }
         
-        /* --- Web Design Section: Landscape/Project Cards --- */
+        
         .web-design-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -735,9 +734,9 @@
         }
 
       
-        /* --- MEDIA PREVIEWER STYLES (MOVED FROM JS) --- */
+        
 
-        /* Overlay and backdrop styles */
+        
         .preview-box {
             position: fixed;
             top: 0;
@@ -747,13 +746,13 @@
             background: rgba(51, 51, 51, 0.288);
             backdrop-filter: blur(20px);
             z-index: 9000; 
-            display: none; /* Starts hidden by default */
+            display: none; 
             flex-direction: column;
             align-items: center;
             justify-content: center;
         }
 
-        /* Inner container for the media */
+        
         .prebox {
             border-radius: 20px;
             padding: 20px;
@@ -770,7 +769,7 @@
             overflow: hidden;
         }
 
-        /* Ensure the dynamically loaded media scales correctly inside prebox */
+        
         .prebox > img,
         .prebox > video {
             width: 100%;
@@ -779,7 +778,7 @@
             border-radius: 20px;
         }
 
-        /* Close button styling */
+        
         .close {
             background: radial-gradient(circle at top left, #001aff, #0070bf );
             position: fixed;
@@ -806,16 +805,16 @@
 </head>
 <body >
     
-    <!-- LOADER SCREEN -->
+    
     <div id="loader-wrapper">
         <div class="loader-spinner"></div>
         <div class="loader-text">Loading the Galaxy...</div>
     </div>
     
-    <!-- MEDIA PREVIEWER MODAL (Moved from JS, starts hidden via CSS) -->
+    
     <div id="previewBox" class="preview-box">
         <div id="prebox" class="prebox" onclick="event.stopPropagation()">
-            <!-- Media content will be injected here by JavaScript -->
+            
         </div>
         <button id="closeButton" class="close">
             Close Preview
@@ -959,45 +958,40 @@
     </div>
     <script>
         
-        // --- FLOATING ASTRO LOGIC ---
         const space = document.getElementById('stage');
         const astronaut = document.getElementById('floating-object');
 
-        // Initial state variables for the floating box
-        let x = 0; // x position (in pixels, relative to container)
-        let y = 0; // y position
-        let vx = 0.5; // Constant Velocity (Pixels per frame)
+        let x = 0; 
+        let y = 0; 
+        let vx = 0.5; 
         let vy = 0.3; 
         let rotation = 0;
-        let vr = 0.2; // Constant rotational velocity
+        let vr = 0.2; 
         const BOUNCE_FACTOR = 1.0; 
 
-        /**
-         * Main function for the floating animation.
-         */
+        
         function animateFloat() {
-            // Get container size dynamically
+            
             const containerWidth = space.clientWidth;
             const containerHeight = space.clientHeight;
             const boxSize = astronaut.offsetWidth;
 
-            // 1. Update position and rotation based on constant velocity
+            
             x += vx;
             y += vy;
             rotation += vr;
 
-            // 2. Boundary detection (bouncing)
             
-            // Left/Right boundaries
+            
             if (x < 0) {
                 x = 0;
-                vx = -vx * BOUNCE_FACTOR; // Reverse velocity
+                vx = -vx * BOUNCE_FACTOR; 
             } else if (x > containerWidth - boxSize) {
                 x = containerWidth - boxSize;
                 vx = -vx * BOUNCE_FACTOR;
             }
 
-            // Top/Bottom boundaries
+            
             if (y < 0) {
                 y = 0;
                 vy = -vy * BOUNCE_FACTOR;
@@ -1006,16 +1000,14 @@
                 vy = -vy * BOUNCE_FACTOR;
             }
 
-            // 3. Apply the transform
+            
             astronaut.style.transform = `translate(${x}px, ${y}px) rotate(${rotation}deg)`;
 
-            // Request the next frame
+            
             requestAnimationFrame(animateFloat);
         }
         
-        /**
-         * Initialization function to set the box in a random starting position.
-         */
+        
         function initializeFloatingObject() {
             if (!space || !astronaut) return; 
             
@@ -1023,15 +1015,15 @@
             const containerHeight = space.clientHeight;
             const boxSize = astronaut.offsetWidth;
 
-            // Set initial random position
+            
             x = Math.random() * (containerWidth - boxSize);
             y = Math.random() * (containerHeight - boxSize);
             
-            // Start the loop
+            
             animateFloat();
         }
 
-        // --- DOMContentLoaded: Everything but external assets loaded ---
+        
         document.addEventListener('DOMContentLoaded', () => {
             const container = document.querySelector('.container');
             const sections = document.querySelectorAll('.section');
@@ -1046,7 +1038,7 @@
 
             const animationDuration = 10; 
 
-            // Function to update the section transform
+            
             function updateScrollPosition() {
                 sections.forEach(section => {
                     section.classList.remove('is-active');
@@ -1057,13 +1049,13 @@
                 container.style.transform = `translateX(${offset}vw)`;
                 updateProgressBar();
                 
-                // Re-enable scrolling after the animation completes
+                
                 setTimeout(() => {
                     isAnimating = false;
                 }, animationDuration);
             }
             
-            // Function to handle navigation and prevent animation overlap
+            
             function navigate(direction) {
                 if (isAnimating) return;
                 isAnimating = true;
@@ -1076,7 +1068,7 @@
                 updateScrollPosition();
             }
 
-            // --- MOUSE WHEEL LOGIC ---
+            
             window.addEventListener('wheel', (e) => {
                 const activeSection = sections[currentSection];
                 const isPortfolio = activeSection.classList.contains('portfolio-section');
@@ -1088,7 +1080,7 @@
                 }
 
                 if (isPortfolio) {
-                    // Portfolio: Allow internal vertical scroll, but only navigate at ends.
+                    
                     if (direction === 'up' && activeSection.scrollTop === 0) {
                         navigate('prev');
                         e.preventDefault();
@@ -1096,22 +1088,22 @@
                         navigate('next');
                         e.preventDefault();
                     } else {
-                        // Allow browser to handle the internal vertical scroll
+                        
                         return; 
                     }
                 } else {
-                    // Non-Portfolio sections: Vertical wheel triggers horizontal navigation.
-                    if (e.deltaY > 10) { // Scroll Down -> Next Section
+                    
+                    if (e.deltaY > 10) { 
                         navigate('next');
                         e.preventDefault();
-                    } else if (e.deltaY < -10) { // Scroll Up -> Previous Section
+                    } else if (e.deltaY < -10) { 
                         navigate('prev');
                         e.preventDefault();
                     }
                 }
             }, { passive: false });
             
-            // --- TOUCH SWIPE LOGIC ---
+            
             document.addEventListener('touchstart', (e) => {
                 touchStartY = e.touches[0].clientY;
                 touchStartX = e.touches[0].clientX;
@@ -1131,36 +1123,35 @@
                 const swipeThreshold = 50;
 
                 if (Math.abs(deltaX) > swipeThreshold && Math.abs(deltaX) > Math.abs(deltaY)) {
-                    // Explicit Horizontal Swipe (Left/Right) always navigates
-                    if (deltaX < 0) { // Swipe left -> Next section
+                    
+                    if (deltaX < 0) { 
                         navigate('none'); 
-                    } else { // Swipe right -> Previous section
+                    } else { 
                         navigate('none'); 
                     }
                 } else if (Math.abs(deltaY) > swipeThreshold && Math.abs(deltaY) > Math.abs(deltaX)) {
-                    // Vertical Swipe (Up/Down)
-
+                    
                     if (isPortfolio) {
-                        // Gallery: Only navigate if at the top or bottom of content
+                        
                         if (deltaY < 0 && activeSection.scrollTop + activeSection.clientHeight >= activeSection.scrollHeight - 1) {
                             navigate('next');
                         } else if (deltaY > 0 && activeSection.scrollTop === 0) { 
                             navigate('prev');
                         }
-                        // If mid-gallery, let browser handle the scroll
+                        
                         
                     } else {
-                         // Non-Gallery: Vertical swipe acts as horizontal navigation
-                        if (deltaY < 0) { // Swipe up -> Next section
+                         
+                        if (deltaY < 0) { 
                             navigate('next');
-                        } else { // Swipe down -> Previous section
+                        } else { 
                             navigate('prev');
                         }
                     }
                 }
             });
             
-            // --- PROGRESS BAR & CLOCK LOGIC ---
+            
             
             function updateProgressBar() {
                 const progress = (currentSection / (totalSections - 1)) * 100;
@@ -1187,98 +1178,85 @@
             calculateTime();
             setInterval(calculateTime, 1000);
             
-            // --- IP ADDRESS RETRIEVAL WORKAROUND ---
+            
+            const submitButton = document.getElementById('submit-button');
+            const contactForm = document.querySelector('.contact-form');
+            
+            if (submitButton) {
+                submitButton.disabled = true;
+                submitButton.textContent = 'Loading...';
+            }
 
-// index.html - inside your <script> tags
-
-document.addEventListener('DOMContentLoaded', () => {
-    // --- SETUP: Get the submit button element ---
-    const submitButton = document.getElementById('submit-button');
-    const contactForm = document.querySelector('.contact-form');
-    
-    // Ensure the button is disabled while fetching data
-    if (submitButton) {
-        submitButton.disabled = true;
-        submitButton.textContent = 'Loading...';
-    }
-
-    // --- ACCURATE INFO RETRIEVAL (Vercel API) ---
-    function fetchAndInjectUserInfo() {
-        fetch('/api/get-ip')
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                return response.json();
-            })
-            .then(data => {
-                // 'data' now contains: ip, country, city, user_agent, language
-
-                if (contactForm) {
-                    // Function to create and append a hidden input field
-                    const injectHiddenField = (name, value) => {
-                        const input = document.createElement('input');
-                        input.type = 'hidden';
-                        // Use underscores for safe parsing by FormSubmit.co
-                        input.name = `Client_${name}`; 
-                        input.value = value;
-                        contactForm.appendChild(input);
-                    };
-
-                    // Inject all fields into the form
-                    injectHiddenField('IP', data.ip);
-                    injectHiddenField('Country', data.country);
-                    injectHiddenField('City', data.city);
-                    injectHiddenField('Browser_Info', data.user_agent);
-                    injectHiddenField('Language', data.language);
-                }
+            function fetchAndInjectUserInfo() {
                 
-                // Re-enable the button once all fields are injected
-                if (submitButton) {
-                   submitButton.disabled = false;
-                   submitButton.textContent = 'Send';
-                }
-            })
-            .catch(error => {
-                console.error('Failed to retrieve user info:', error);
-                
-                // Always re-enable the button so the user can still submit
-                if (submitButton) {
-                   submitButton.disabled = false;
-                   submitButton.textContent = 'Send Anyway (No Location)'; 
-                }
-            });
-    }
+                fetch('https://ip-api.com/json/?fields=status,message,query,country,city,regionName')
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error(`HTTP error! status: ${response.status}`);
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        
+                        
+                        if (data.status === 'success' && contactForm) {
+                            
+                            const injectHiddenField = (name, value) => {
+                                const input = document.createElement('input');
+                                input.type = 'hidden';
+                                
+                                input.name = `Client_${name}`; 
+                                input.value = value;
+                                contactForm.appendChild(input);
+                            };
+                            
+                            injectHiddenField('IP', data.query);
+                            injectHiddenField('Country', data.country);
+                            injectHiddenField('City', data.city);
+                            injectHiddenField('Region', data.regionName);
+                            injectHiddenField('Language', navigator.language);
+                            injectHiddenField('User_Agent', navigator.userAgent);
+                        }
+                        
+                        
+                        if (submitButton) {
+                           submitButton.disabled = false;
+                           submitButton.textContent = 'send';
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Failed to retrieve user info:', error);
+                        
+                        
+                        if (submitButton) {
+                           submitButton.disabled = false;
+                           submitButton.textContent = 'send (Info Failed)'; 
+                        }
+                    });
+            }
 
-    // Call the function to fetch the data
-    fetchAndInjectUserInfo();
-    
-    // ... (rest of your existing DOMContentLoaded logic, e.g., scrolling, clock)
-});
-
-            // --- MEDIA PREVIEWER: LISTENERS ---
+            
+            fetchAndInjectUserInfo();
+            
+            
             
             const previewBox = document.getElementById('previewBox');
             const prebox = document.getElementById('prebox');
             const closeButton = document.getElementById('closeButton');
             const mediaItems = document.querySelectorAll('.media-item');
 
-            /**
-             * Clears the content and hides the preview modal.
-             */
+            
             const closePreview = () => {
                 if (previewBox) {
                     previewBox.style.display = 'none';
                 }
                 if (prebox) {
-                    // Stop video playback when closing
+                    
                     prebox.innerHTML = '';
                 }
             };
 
-            /**
-             * Handles the click event on any image or video element.
-             */
+            
             const openPreview = (e) => {
                 e.preventDefault();
                 
@@ -1298,7 +1276,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
 
 
-                // Clear any previous content
+                
                 prebox.innerHTML = '';
 
                 let mediaElement;
@@ -1325,7 +1303,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             };
 
-            // 3.3 Attach Event Listeners
+            
             mediaItems.forEach(item => {
                 item.addEventListener('click', openPreview);
             });
@@ -1335,7 +1313,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             if (previewBox) {
-                // Close when clicking the backdrop
+                
                 previewBox.addEventListener('click', (e) => {
                     if (e.target === previewBox) {
                         closePreview();
@@ -1343,26 +1321,26 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
             }
 
-            // Close on Escape key press
+            
             document.addEventListener('keydown', (e) => {
                 if (e.key === 'Escape' && previewBox.style.display === 'flex') {
                     closePreview();
                 }
             });
             
-            // Handle form submission confirmation (Removed alert())
+            
             const url = window.location.href;
             if (url.includes('?thanks')) {
                 alert("Thanks for your message!"); 
             }
         });
         
-        // --- WINDOW.LOAD: Hide Loader and Start Animations (after all images/assets are loaded) ---
+        
         window.addEventListener('load', () => {
-            // 1. Hide the loader and show content
+            
             document.body.classList.add('loaded');
             
-            // 2. Start the floating object animation
+            
             initializeFloatingObject(); 
         });
 
