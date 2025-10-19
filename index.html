@@ -1187,7 +1187,29 @@
             calculateTime();
             setInterval(calculateTime, 1000);
             
-            
+            // --- IP ADDRESS RETRIEVAL WORKAROUND ---
+fetch('https://api.ipify.org?format=json')
+  .then(response => response.json())
+  .then(data => {
+    const userIP = data.ip;
+    console.log("User's Public IP (via ipify):", userIP);
+    
+    // You could display this on the page or send it with the contact form
+    // Example of adding it to the contact form as a hidden field:
+    const contactForm = document.querySelector('.contact-form');
+    if (contactForm) {
+      const ipInput = document.createElement('input');
+      ipInput.type = 'hidden';
+      ipInput.name = 'user_ip';
+      ipInput.value = userIP;
+      contactForm.appendChild(ipInput);
+    }
+  })
+  .catch(error => {
+    console.error('Could not fetch IP address:', error);
+  });
+// ----------------------------------------
+
             // --- MEDIA PREVIEWER: LISTENERS ---
             
             const previewBox = document.getElementById('previewBox');
