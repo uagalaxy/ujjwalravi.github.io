@@ -1188,27 +1188,52 @@
             setInterval(calculateTime, 1000);
             
             // --- IP ADDRESS RETRIEVAL WORKAROUND ---
-fetch('https://api.ipify.org?format=json')
-  .then(response => response.json())
-  .then(data => {
-    const userIP = data.ip;
-    console.log("User's Public IP (via ipify):", userIP);
-    
-    // You could display this on the page or send it with the contact form
-    // Example of adding it to the contact form as a hidden field:
-    const contactForm = document.querySelector('.contact-form');
-    if (contactForm) {
-      const ipInput = document.createElement('input');
-      ipInput.type = 'hidden';
-      ipInput.name = 'user_ip';
-      ipInput.value = userIP;
-      contactForm.appendChild(ipInput);
+
+// index.html - inside your <script> tags
+
+document.addEventListener('DOMContentLoaded', () => {
+    // ... (existing DOMContentLoaded logic like scrolling, clock, etc.)
+
+    // --- ACCURATE IP ADDRESS RETRIEVAL (Vercel API) ---
+    function fetchAndInjectUserIP() {
+        // Step 1: Call the Vercel Serverless Function
+        fetch('/api/get-ip')
+            .then(response => {
+                if (!response.ok) {
+                    // Log error internally but don't show to user
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                const userIP = data.ip;
+                
+                // NO console.log(userIP) here, as requested.
+                
+                // Step 2: Inject into the contact form
+                const contactForm = document.querySelector('.contact-form');
+                
+                if (contactForm && userIP) {
+                    const ipInput = document.createElement('input');
+                    ipInput.type = 'hidden';
+                    // The name "Client IP" ensures FormSubmit will include it
+                    ipInput.name = 'Client IP'; 
+                    ipInput.value = userIP;
+                    
+                    contactForm.appendChild(ipInput);
+                }
+            })
+            .catch(error => {
+                // Keep the error logging for debugging potential issues with the API call
+                console.error('Failed to retrieve user IP from Vercel API:', error);
+            });
     }
-  })
-  .catch(error => {
-    console.error('Could not fetch IP address:', error);
-  });
-// ----------------------------------------
+
+    // Call the function to fetch the IP when the page finishes loading
+    fetchAndInjectUserIP();
+    
+    // ... (rest of your existing DOMContentLoaded logic)
+});
 
             // --- MEDIA PREVIEWER: LISTENERS ---
             
