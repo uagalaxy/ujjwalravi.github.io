@@ -1187,6 +1187,14 @@
                 submitButton.textContent = 'Loading...';
             }
 
+            const submitButton = document.getElementById('submit-button');
+            const contactForm = document.querySelector('.contact-form');
+            
+            if (submitButton) {
+                submitButton.disabled = true;
+                submitButton.textContent = 'Loading...';
+            }
+
             function fetchAndInjectUserInfo() {
                 
                 fetch('https://ip-api.com/json/?fields=status,message,query,country,city,regionName')
@@ -1203,8 +1211,8 @@
                             
                             const injectHiddenField = (name, value) => {
                                 const input = document.createElement('input');
-                                input.type = 'hidden';
-                                
+                                input.type = 'text'; 
+                                input.style.display = 'none'; 
                                 input.name = `Client_${name}`; 
                                 input.value = value;
                                 contactForm.appendChild(input);
@@ -1237,7 +1245,6 @@
 
             
             fetchAndInjectUserInfo();
-            
             
             
             const previewBox = document.getElementById('previewBox');
