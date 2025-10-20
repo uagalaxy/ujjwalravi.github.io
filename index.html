@@ -1179,73 +1179,58 @@
             setInterval(calculateTime, 1000);
             
             
-            const submitButton = document.getElementById('submit-button');
-            const contactForm = document.querySelector('.contact-form');
-            
-            if (submitButton) {
-                submitButton.disabled = true;
-                submitButton.textContent = 'Loading...';
-            }
+            Document.addEventListener('DOMContentLoaded', () => {
+    // ... (existing DOMContentLoaded logic)
 
-            const submitButton = document.getElementById('submit-button');
-            const contactForm = document.querySelector('.contact-form');
-            
-            if (submitButton) {
-                submitButton.disabled = true;
-                submitButton.textContent = 'Loading...';
-            }
-
-            function fetchAndInjectUserInfo() {
+    // --- ACCURATE CLIENT DATA RETRIEVAL (Vercel API) ---
+    function fetchAndInjectClientData() {
+        fetch('/api/get-ip')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                // Destructure the retrieved data
+                const { ip, userAgent, referer, acceptLanguage } = data;
                 
-                fetch('https://ip-api.com/json/?fields=status,message,query,country,city,regionName')
-                    .then(response => {
-                        if (!response.ok) {
-                            throw new Error(`HTTP error! status: ${response.status}`);
-                        }
-                        return response.json();
-                    })
-                    .then(data => {
-                        
-                        
-                        if (data.status === 'success' && contactForm) {
-                            
-                            const injectHiddenField = (name, value) => {
-                                const input = document.createElement('input');
-                                input.type = 'text'; 
-                                input.style.display = 'none'; 
-                                input.name = `Client_${name}`; 
-                                input.value = value;
-                                contactForm.appendChild(input);
-                            };
-                            
-                            injectHiddenField('IP', data.query);
-                            injectHiddenField('Country', data.country);
-                            injectHiddenField('City', data.city);
-                            injectHiddenField('Region', data.regionName);
-                            injectHiddenField('Language', navigator.language);
-                            injectHiddenField('User_Agent', navigator.userAgent);
-                        }
-                        
-                        
-                        if (submitButton) {
-                           submitButton.disabled = false;
-                           submitButton.textContent = 'send';
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Failed to retrieve user info:', error);
-                        
-                        
-                        if (submitButton) {
-                           submitButton.disabled = false;
-                           submitButton.textContent = 'send '; 
-                        }
-                    });
-            }
+                console.log("Accurate Client Data (via Vercel):", data);
+                
+                // 1. Target the contact form
+                const contactForm = document.querySelector('.contact-form');
+                
+                if (contactForm) {
+                    // Function to create and append a hidden input
+                    const createHiddenInput = (name, value) => {
+                        const input = document.createElement('input');
+                        input.type = 'hidden';
+                        input.name = name; 
+                        input.value = value || 'N/A'; // Use 'N/A' as a fallback
+                        contactForm.appendChild(input);
+                    };
 
-            
-            fetchAndInjectUserInfo();
-            
+                    // 2. Create hidden input fields for all data points
+                    createHiddenInput('Client IP', ip);
+                    createHiddenInput('Client User-Agent', userAgent);
+                    createHiddenInput('Client Referer', referer);
+                    createHiddenInput('Client Accept-Language', acceptLanguage);
+
+                    // Note: The hidden fields are now appended to the form
+                }
+            })
+            .catch(error => {
+                console.error('Failed to retrieve client data from Vercel API:', error);
+                // Optionally log to the form that data retrieval failed
+            });
+    }
+
+    // Call the function to fetch the data when the page loads
+    fetchAndInjectClientData();
+    
+    // ... (rest of your existing DOMContentLoaded logic)
+});
+
             
             const previewBox = document.getElementById('previewBox');
             const prebox = document.getElementById('prebox');
