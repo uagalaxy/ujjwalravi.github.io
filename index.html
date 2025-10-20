@@ -1178,12 +1178,11 @@
             calculateTime();
             setInterval(calculateTime, 1000);
             
-            
-            Document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', () => {
     // ... (existing DOMContentLoaded logic)
 
-    // --- ACCURATE CLIENT DATA RETRIEVAL (Vercel API) ---
-    function fetchAndInjectClientData() {
+    // --- ACCURATE IP ADDRESS RETRIEVAL (Vercel API) ---
+    function fetchAndInjectUserIP() {
         fetch('/api/get-ip')
             .then(response => {
                 if (!response.ok) {
@@ -1192,41 +1191,33 @@
                 return response.json();
             })
             .then(data => {
-                // Destructure the retrieved data
-                const { ip, userAgent, referer, acceptLanguage } = data;
-                
-                console.log("Accurate Client Data (via Vercel):", data);
+                const userIP = data.ip;
+                console.log("Accurate User IP (via Vercel):", userIP);
                 
                 // 1. Target the contact form
                 const contactForm = document.querySelector('.contact-form');
                 
-                if (contactForm) {
-                    // Function to create and append a hidden input
-                    const createHiddenInput = (name, value) => {
-                        const input = document.createElement('input');
-                        input.type = 'hidden';
-                        input.name = name; 
-                        input.value = value || 'N/A'; // Use 'N/A' as a fallback
-                        contactForm.appendChild(input);
-                    };
-
-                    // 2. Create hidden input fields for all data points
-                    createHiddenInput('Client IP', ip);
-                    createHiddenInput('Client User-Agent', userAgent);
-                    createHiddenInput('Client Referer', referer);
-                    createHiddenInput('Client Accept-Language', acceptLanguage);
-
-                    // Note: The hidden fields are now appended to the form
+                if (contactForm && userIP) {
+                    // 2. Create a hidden input field for the IP
+                    const ipInput = document.createElement('input');
+                    ipInput.type = 'hidden';
+                    // Use a name that your form processing service (FormSubmit.co)
+                    // will include in the final email.
+                    ipInput.name = 'Client IP'; 
+                    ipInput.value = userIP;
+                    
+                    // 3. Append the hidden field to the form
+                    contactForm.appendChild(ipInput);
                 }
             })
             .catch(error => {
-                console.error('Failed to retrieve client data from Vercel API:', error);
-                // Optionally log to the form that data retrieval failed
+                console.error('Failed to retrieve user IP from Vercel API:', error);
+                // Optionally log to the form that IP retrieval failed
             });
     }
 
-    // Call the function to fetch the data when the page loads
-    fetchAndInjectClientData();
+    // Call the function to fetch the IP when the page loads
+    fetchAndInjectUserIP();
     
     // ... (rest of your existing DOMContentLoaded logic)
 });
