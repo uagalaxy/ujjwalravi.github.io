@@ -1295,7 +1295,25 @@ fetch('https://api.ipify.org?format=json')
             }
         });
         
-        
+        function removeQueryString(url) {
+  const index = url.indexOf('?');
+  return index !== -1 ? url.substring(0, index) : url;
+}
+
+const originalUrl = "https://ujjwalravi.vercel.app?thanks";
+console.log("Original URL:", originalUrl);
+
+const delayInMilliseconds = 2000;
+
+console.log(`Triggering URL cleanup in ${delayInMilliseconds / 1000} seconds...`);
+
+setTimeout(() => {
+  const cleanUrl = removeQueryString(originalUrl);
+  console.log("2 seconds elapsed!");
+  console.log("Cleaned URL:", cleanUrl);
+  // history.pushState({}, '', cleanUrl); 
+}, delayInMilliseconds);
+
         window.addEventListener('load', () => {
             
             document.body.classList.add('loaded');
